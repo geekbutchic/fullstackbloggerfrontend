@@ -20,7 +20,7 @@ const App = () => {
     };
     fetchData();
   }, []);
-
+  console.log(serverJSON);
   return (
     <div className="app">
       <header className="app-header">
