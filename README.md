@@ -1,8 +1,8 @@
-### Requirements (Front-End Part 1)
+# FRONTEND
 
 * Create a new github repo called fullstackbloggerfrontend, clone the repo to your computer and add the link to populi. ✅
 * Initialize the repo with create-react-app. ✅
-* Install react-router. 
+* Install react-router. ✅
 * Configure react-router by adding <BrowserRouter> to index.js.
 * Create a new folder ./src/Pages
 * Create a new file ./src/Pages/Blogs.js
