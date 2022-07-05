@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
 
-const Blogs = () => {
+const BlogsPage = (props) => {
   return (
-    <div>
-        Blogs
+    <div className="blogs-page">
+      <h1>
+        Blogs Page
+      </h1>
+      <p>
+        Server Message: {props.message}
+      </p>
     </div>
-  )
-}
+  );
+};
 
-export default Blogs
+export default BlogsPage;

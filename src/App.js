@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 //react router imp
 import { useState, useEffect } from "react";
 //use state imp
+import BlogsPage from './Pages/Blogs'
 import React from "react";
 import "./App.css";
 
@@ -24,7 +25,7 @@ const App = () => {
     <div className="app">
       <header className="app-header">
         <Routes>
-          <Route />
+          <Route path="/blogs" element={<BlogsPage message={serverJSON.message}/>}/>
         </Routes>
       </header>
     </div>
