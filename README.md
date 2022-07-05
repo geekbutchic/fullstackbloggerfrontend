@@ -1,71 +1,39 @@
-# Getting Started with Create React App
+### Requirements (Front-End Part 1)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# fullstackbloggerfrontend
+* Create a new github repo called fullstackbloggerfrontend, clone the repo to your computer and add the link to populi. ✅
+* Initialize the repo with create-react-app. ✅
+* Install react-router. 
+* Configure react-router by adding <BrowserRouter> to index.js.
+* Create a new folder ./src/Pages
+* Create a new file ./src/Pages/Blogs.js
+* Create and default export a new react component BlogsPage in ./src/Pages/Blogs.js.
+* In ./src/App.js, import the <Routes></Routes> component from react-router and add it to the JSX (HTML) of the App component. 
+* Add a state variable to App called serverJSON, initialized to:
+  * {message: null}
+* Add the following string as a global variable in ./src/App.js above the App component:
+  * const urlEndpoint =
+  "http://localhost:4000";
+* Add the following useEffect method to App:
+  * useEffect(() => {
+    const fetchData = async () => {
+      const apiResponse = await fetch(`${urlEndpoint}/blogs/hello-blogs`);
+      const apiJSON = await apiResponse.json();
+      setServerJSON(apiJSON);
+      return;
+    };
+    fetchData();
+  }, []);
+* In ./src/App.js, import the <Route> component from react-router and the BlogsPage component from ./src/Pages/Blogs.
+* In the JSX of App, nest a new <Route> in <Routes> with the path="/blogs" with the element={<BlogsPage message={serverJSON.message}/>}.
+* In ./src/Pages/BlogsPage, display the prop variable message in the JSX of the BlogsPage component 
+  * const BlogsPage = (props) => {
+    return (
+      <div className="blogs-page">
+        <h1>Blogs Page</h1>
+        <p>Server Message: {props.message}</p>
+      </div>
+    )
+  }
+* Run npm start in ./ and navigate to "localhost:3000/blogs" and if everything has been set up correctly, you should see the following on page:
+  * Blogs Page
+    Server Message: hello from express.
