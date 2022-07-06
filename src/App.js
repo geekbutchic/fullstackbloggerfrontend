@@ -9,23 +9,23 @@ import "./App.css";
 const urlEndpoint = "http://localhost:4000";
 
 const App = () => {
-  const [serverJSON, setServerJSON] = useState({ message: null });
+  const [serverJSON, setServerJSON] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiResponse = await fetch(`${urlEndpoint}/blogs/hello-blogs`);
+      const apiResponse = await fetch(`${urlEndpoint}/blogs/all-blogs`);
       const apiJSON = await apiResponse.json();
+      console.log(apiJSON);
       setServerJSON(apiJSON);
       return;
     };
     fetchData();
   }, []);
-  console.log(serverJSON);
   return (
     <div className="app">
       <header className="app-header">
         <Routes>
-          <Route path="/blogs" element={<BlogsPage message={serverJSON.message}/>}/>
+          <Route path="/blogs" element={<BlogsPage allBlogs={serverJSON}/>}/>
         </Routes>
       </header>
     </div>

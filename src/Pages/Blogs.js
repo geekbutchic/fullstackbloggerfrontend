@@ -7,7 +7,13 @@ const BlogsPage = (props) => {
         Blogs Page
       </h1>
       <p>
-        Server Message: {props.message}
+        Server Message: {props.allBlogs.map((blog) => {
+            return (
+                <>
+                {blog.title}
+                </>
+            )
+        })}
       </p>
     </div>
   );
