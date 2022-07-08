@@ -3,56 +3,69 @@ import React from "react";
 const BlogsPage = (props) => {
   return (
     <div className="blogs-page">
-      <h1 style={{ display: "flex", justifyContent: "center"}}>Blogs Page</h1>
+      <h1 style={{ display: "flex", justifyContent: "center" }}>Blogs Page</h1>
       <p>
-        Select: {" "}
-        <select value={props.sortField}>
-            <option value="title">Title</option>
-            <option value="author">Author</option>
-            <option value="createdAt">Generated</option>
-        </select>
-        {" "}
-        SortOrder: {" "}
-        <select value={props.sortOrder}>
-            <option value="ASC">Ascend</option>
-            <option value="DESC">Descend</option>
-        </select>
-        {" "}
-        Filter Field: {" "}
-        <select value={props.filterField}>
-        <option value="title">Title</option>
-        <option value="author">Author</option>
+        Select:{" "}
+        <select
+          value={props.sortField}
+          onChange={(e) => {
+            const value = e.target.value;
+            props.setSortField(value);
+          }}
+        >
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="createdAt">Generated</option>
+        </select>{" "}
+        SortOrder:{" "}
+        <select
+          value={props.sortOrder}
+          onChange={(e) => {
+            const value = e.target.value;
+            props.setSortOrder(value);
+          }}
+        >
+          <option value="ASC">Ascend</option>
+          <option value="DESC">Descend</option>
+        </select>{" "}
+        Filter Field:{" "}
+        <select 
+        value={props.filterField}
+        onChange={(e)=> {
+          const value = e.target.value;
+          props.setFilterField(value)
+        }}
+        >
+          <option value="title">Title</option>
+          <option value="author">Author</option>
         </select>
         <br></br>
-        Filter Value: {" "}
-        <input 
-        value={props.filterValue}
-        onChange={()=> {
-
-        }}
-        >
-        
-        </input>
-        {" "}
-        Limit: {" "}
+        Filter Value:{" "}
         <input
-        value={props.limit}
-        onChange={()=> {
-
-        }}
-        >
-        
-        </input>
-        {" "}
-        Page: {" "}
+          type="text"
+          value={props.filterValue}
+          onChange={(e) => {
+            const value = e.target.value;
+            props.setFilterValue(value);
+          }}
+        ></input>{" "}
+        Limit:{" "}
         <input
-        value={props.page}
-        onChange={()=> {
-
-        }}
-        >
-        
-        </input>
+          type="number"
+          value={props.limit}
+          onChange={(e) => {
+            const value = e.target.value;
+            props.setLimit(value);
+          }}
+        ></input>{" "}
+        Page:{" "}
+        <input
+          value={props.page}
+          onChange={(e) => {
+            const value = e.target.value;
+            props.setPage(value);
+          }}
+        ></input>
         {props.serverJSON.map((blog, index) => {
           return (
             <div
@@ -62,7 +75,7 @@ const BlogsPage = (props) => {
               }}
             >
               Id: {blog.id}
-              <br></br>  
+              <br></br>
               Title : {blog.title.toUpperCase()}
               <br></br>
               Author : {blog.author}

@@ -10,7 +10,7 @@ const urlEndpoint = "http://localhost:4000";
 
 const App = (props) => {
   const [serverJSON, setServerJSON] = useState([]);
-  const [sortField, setsSortField] = useState("");
+  const [sortField, setSortField] = useState("");
   const [sortOrder, setSortOrder] = useState("ASC");
   const [filterField, setFilterField] = useState("");
   const [filterValue, setFilterValue] = useState("");
@@ -19,7 +19,7 @@ const App = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiResponse = await fetch(`${urlEndpoint}/blogs/all-blogs`);
+      const apiResponse = await fetch(`${urlEndpoint}/blogs/all-blogs?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`);
       //endpoint modified to fetch all blogs
       const apiJSON = await apiResponse.json();
       console.log(apiJSON);
@@ -27,7 +27,7 @@ const App = (props) => {
       return;
     };
     fetchData();
-  }, []);
+  }, [sortField, sortOrder, filterField, filterValue, limit, page]);
   return (
     <div className="app">
       <header className="app-header">
@@ -37,12 +37,25 @@ const App = (props) => {
             element=
             {<BlogsPage 
             serverJSON={serverJSON}
-            sortField={sortField} 
+            setServerJSON={setServerJSON}
+
+            sortField={sortField}
+            setSortField={setSortField}
+
             sortOrder={sortOrder}
+            setSortOrder={setSortOrder}
+
             filterField={filterField}
+            setFilterField={setFilterField}
+
             filterValue={filterValue}
+            setFilterValue={setFilterValue}
+
             limit={limit}
+            setLimit={setLimit}
+
             page={page}
+            setPage={setPage}
             />}
           />
         </Routes>
