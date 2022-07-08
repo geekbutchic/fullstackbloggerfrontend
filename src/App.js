@@ -27,6 +27,7 @@ const App = (props) => {
       return;
     };
     fetchData();
+    //watches changes in a state - in those particular states
   }, [sortField, sortOrder, filterField, filterValue, limit, page]);
   return (
     <div className="app">

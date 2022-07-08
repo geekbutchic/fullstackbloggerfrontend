@@ -7,19 +7,20 @@ const BlogsPage = (props) => {
       <p>
         Select:{" "}
         <select
-          value={props.sortField}
+          defaultValue={props.sortField}
           onChange={(e) => {
             const value = e.target.value;
             props.setSortField(value);
           }}
         >
+          <option value=""></option>
           <option value="title">Title</option>
           <option value="author">Author</option>
           <option value="createdAt">Generated</option>
         </select>{" "}
         SortOrder:{" "}
         <select
-          value={props.sortOrder}
+          defaultValue={props.sortOrder}
           onChange={(e) => {
             const value = e.target.value;
             props.setSortOrder(value);
@@ -30,12 +31,13 @@ const BlogsPage = (props) => {
         </select>{" "}
         Filter Field:{" "}
         <select 
-        value={props.filterField}
+        defaultValue={props.filterField}
         onChange={(e)=> {
           const value = e.target.value;
           props.setFilterField(value)
         }}
         >
+          <option value=""></option>
           <option value="title">Title</option>
           <option value="author">Author</option>
         </select>
