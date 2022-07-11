@@ -68,7 +68,7 @@ const BlogsPage = (props) => {
             props.setPage(value);
           }}
         ></input>
-        {props.serverJSON.map((blog, index) => {
+        {props.blogs.map((blog, index) => {
           return (
             <div
               key={`${blog}-${index}`}
