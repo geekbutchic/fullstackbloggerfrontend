@@ -10,15 +10,17 @@ import "./App.css";
 const urlEndpoint = "http://localhost:4000";
 
 const App = (props) => {
-  const [serverJSON, setServerJSON] = useState([]);
-  const [sortField, setSortField] = useState("");
-  const [sortOrder, setSortOrder] = useState("ASC");
-  const [filterField, setFilterField] = useState("");
+  const [serverJSON, setServerJSON] = useState({ message : [] });
+  const [sortField, setSortField] = useState("id");
+  const [sortOrder, setSortOrder] = useState("DESC");
+  const [filterField, setFilterField] = useState("title");
   const [filterValue, setFilterValue] = useState("");
   const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [isFetching, setIsFetching] = useState(false);
 
   const blogSubmit = async (blog) => {
+    setIsFetching(true);
     const url = `${urlEndpoint}/blogs/blog-submit`;
     const response = await fetch(url, {
       method: "POST",
@@ -28,6 +30,7 @@ const App = (props) => {
       body: JSON.stringify(blog),
     });
     const responseJSON = await response.json();
+    setIsFetching(false);
     return responseJSON;
   };
 
@@ -44,7 +47,7 @@ const App = (props) => {
     };
     fetchData();
     //watches changes in a state - in those particular states
-  }, [sortField, sortOrder, filterField, filterValue, limit, page]);
+  }, [sortField, sortOrder, filterField, filterValue, limit, page, isFetching]);
   console.log("serverJSON ", serverJSON);
   return (
     <div className="app">
@@ -54,7 +57,7 @@ const App = (props) => {
             index
             element={
               <BlogsPage
-                blogs={serverJSON}
+                blogs={serverJSON.message}
                 sortField={sortField}
                 setSortField={setSortField}
                 sortOrder={sortOrder}
