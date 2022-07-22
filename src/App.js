@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 //use state imp
 import BlogsPage from "./Pages/Blogs";
 import PostBlogPage from "./Pages/PostBlogPage";
+import BlogManager from "./Pages/BlogManager";
 import React from "react";
 import "./App.css";
 
 const urlEndpoint = "http://localhost:4000";
 
 const App = (props) => {
-  const [serverJSON, setServerJSON] = useState({ message : [] });
+  const [serverJSON, setServerJSON] = useState({ message: [] });
   const [sortField, setSortField] = useState("id");
   const [sortOrder, setSortOrder] = useState("DESC");
   const [filterField, setFilterField] = useState("title");
@@ -18,7 +19,10 @@ const App = (props) => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
+  const [adminBlogList, setAdminBlogList] = useState([]);
+  const [adminBlogsLoading, setAdminBlogsLoading] = useState(false);
 
+  //BY DEFAULT FETCH DOES A GET REQUEST
   const blogSubmit = async (blog) => {
     setIsFetching(true);
     const url = `${urlEndpoint}/blogs/blog-submit`;
@@ -34,6 +38,28 @@ const App = (props) => {
     return responseJSON;
   };
 
+  const deleteBlog = async (blogId) => {
+    setAdminBlogsLoading(true);
+    const url = `${urlEndpoint}/admin/delete-blog/${blogId}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+    });
+    const responseJSON = await response.json();
+    setAdminBlogsLoading(false);
+  };
+
+  useEffect(() => {
+    const fetchAdminBlogList = async () => {
+      const apiResponse = await fetch(`${urlEndpoint}/admin/blog-list`);
+      const json = await apiResponse.json();
+      console.log(json);
+      console.log(json.message);
+      setAdminBlogList(json.message);
+      return json;
+    };
+    fetchAdminBlogList();
+  }, [adminBlogsLoading]);
+
   useEffect(() => {
     const fetchData = async () => {
       const apiResponse = await fetch(
@@ -48,7 +74,7 @@ const App = (props) => {
     fetchData();
     //watches changes in a state - in those particular states
   }, [sortField, sortOrder, filterField, filterValue, limit, page, isFetching]);
-  console.log("serverJSON ", serverJSON);
+  console.log("adminBlogList ", adminBlogList);
   return (
     <div className="app">
       <header className="app-header">
@@ -76,6 +102,15 @@ const App = (props) => {
           <Route
             path="/post-blog"
             element={<PostBlogPage blogSubmit={blogSubmit} />}
+          />
+          <Route
+            path="/blog-manager"
+            element={
+              <BlogManager
+                adminBlogList={adminBlogList}
+                deleteBlog={deleteBlog}
+              />
+            }
           />
         </Routes>
       </header>
