@@ -3,6 +3,8 @@ import React from "react";
 const BlogManagerCard = (props) => {
   const createdAtDate = new Date(props.blog.createdAt);
   const createdAtString = createdAtDate.toDateString();
+  const modifiedAtDate = new Date(props.blog.lastModified);
+  const modifiedAtString = modifiedAtDate.toDateString();
   return (
     <div
       style={{
@@ -45,7 +47,7 @@ const BlogManagerCard = (props) => {
         <p>
           <strong>Last Modified: </strong>
           &nbsp;
-          {props.blog.lastModified}
+          {modifiedAtString}
         </p>
       </span>
       <span>
@@ -56,6 +58,11 @@ const BlogManagerCard = (props) => {
         </p>
       </span>
       <button
+        style={{
+          borderRadius: "10px",
+          width: "80px",
+          height: "30px",
+        }}
         onClick={async () => {
           await props.deleteBlog(props.blog.id);
         }}

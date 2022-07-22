@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const PostBlogPage = (props) => {
   const [title, setTitle] = useState("");
@@ -9,12 +9,12 @@ const PostBlogPage = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ marginLeft : "20px"}}>
+    <div style={{ marginLeft: "20px" }}>
       <h1>Post Blog Page</h1>
       <br></br>
       <label>Title</label>
       <input
-        style={{ display: "flex"}}
+        style={{ display: "flex" }}
         type="text"
         value={title}
         onChange={(e) => {
@@ -25,7 +25,7 @@ const PostBlogPage = (props) => {
       ></input>
       <label>Author</label>
       <input
-        style={{ display: "flex"}}
+        style={{ display: "flex" }}
         type="text"
         value={author}
         onChange={(e) => {
@@ -37,7 +37,7 @@ const PostBlogPage = (props) => {
 
       <label>Text Area</label>
       <textarea
-         style={{ display: "flex"}}
+        style={{ display: "flex" }}
         type="text"
         value={text}
         onChange={(e) => {
@@ -47,15 +47,15 @@ const PostBlogPage = (props) => {
         }}
       ></textarea>
       <button
-      style={{ marginTop: "10px"}}
-      onClick={async() => {
-        await props.blogSubmit({
+        style={{ marginTop: "10px" }}
+        onClick={() => {
+           props.blogSubmit({
             title: title,
-            author: author, 
+            author: author,
             text: text,
-        })
-        navigate("/")
-      }}
+          });
+          navigate("/");
+        }}
       >
         SUBMIT
       </button>
